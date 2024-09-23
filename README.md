@@ -10,7 +10,8 @@ No need to buy a DreamView device or camera to support light sync for Govee prod
  2. Rename your `.env.example` file to `.env` and replace `API_KEY`, `SKU`, and `DEVICE_ID` with your credentials
 	 - Submit the following GET Request if you are unsure of your SKU and Device ID: 
 		 `GET /router/api/v1/user/devices HTTP/1.1 Host: https://openapi.api.govee.com Content-Type: application/json Govee-API-Key: {API KEY}`
- 3. Run `Main.java` and your lights should be synced to your display!
+ 3. Run `mvn install` in your terminal and you should see "BUILD SUCCESS"
+ 4. Run `Main.java` and your lights should be synced to your display!
 
 *For those who want to play around with the performance and color change threshold, look for the "MODIFIABLE" comments in `Main.java`*
 

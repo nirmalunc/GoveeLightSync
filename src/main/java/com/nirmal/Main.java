@@ -177,7 +177,8 @@ public class Main {
         System.out.println("API Key: " + API_KEY);
         System.out.println("SKU: " + SKU);
         System.out.println("Device ID: " + DEVICE_ID);
-        // Thread 1: Color calculation, running every 100ms by default
+
+        // Thread 1: Color calculation, running every 150ms by default
         scheduler.scheduleAtFixedRate(() -> {
             try {
 
@@ -195,9 +196,9 @@ public class Main {
             } catch (AWTException ex) {
                 ex.printStackTrace();
             }
-        }, 0, 100, TimeUnit.MILLISECONDS); // MODIFIABLE: INCREASE OR DECREASE TIME BASED ON COMPUTER PERFORMANCE (Recommend keeping thread 2's time lower than thread 1)
+        }, 0, 180, TimeUnit.MILLISECONDS); // MODIFIABLE: INCREASE OR DECREASE TIME BASED ON COMPUTER PERFORMANCE (Recommend keeping thread 2's time lower than thread 1)
 
-        // Thread 2: Threshold checker, running every 50ms by default
+        // Thread 2: Threshold checker, running every 30ms by default
         scheduler.scheduleAtFixedRate(() -> {
             synchronized (newColor) {
                 // Check if the threshold is surpassed and color changed
@@ -207,7 +208,7 @@ public class Main {
                     // Submit the task to update the color
                     try {
                         setColor(rgbNumber);
-                        System.out.println("Color Changed to: " + rgbNumber);
+                        // System.out.println("Color Changed to: " + rgbNumber); // Optional: Uncomment if you want to be notified each time the color changes
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -221,6 +222,6 @@ public class Main {
                     colorChanged = false;
                 }
             }
-        }, 0, 50, TimeUnit.MILLISECONDS); // MODIFIABLE: INCREASE OR DECREASE TIME BASED ON COMPUTER PERFORMANCE (Recommend keeping thread 2's time lower than thread 1)
+        }, 0, 30, TimeUnit.MILLISECONDS); // MODIFIABLE: INCREASE OR DECREASE TIME BASED ON COMPUTER PERFORMANCE (Recommend keeping thread 2's time lower than thread 1)
     }
 }

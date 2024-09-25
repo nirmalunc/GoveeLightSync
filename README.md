@@ -15,8 +15,14 @@ No need to buy a DreamView device or camera to support light sync for Govee prod
 
 *For those who want to play around with the performance and color change threshold, look for the "MODIFIABLE" comments in `Main.java`*
 
+***9/25 Patch Update - Reduced Latency!***
+- Upgraded to HTTPClient to leverage HTTP/2
+- Reduced # of pixels processed per calculation
+- Asynchronous POST Requests with timeout to prevent bottlenecks
+- Lowered default color change threshold since it is now capable of handling color changes more often
+
 ***Planned Future Updates:***
+- Reduced latency delay ✅
 - More user-friendly support ⭐
-- Reduced latency delay ⭐
 - Ability to use screen edges for color sync ⭐
 - User Suggestions: https://forms.gle/NK6y5NysLNNfNUKC7

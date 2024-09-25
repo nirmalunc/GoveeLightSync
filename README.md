@@ -1,6 +1,12 @@
 # GoveeLightSync
 No need to buy a DreamView device or camera to support light sync for Govee products! Now you can natively sync any Govee lights to your display.
 
+**9/25 Patch Update - Reduced Latency!**
+- Upgraded to HTTPClient to leverage HTTP/2
+- Reduced # of pixels processed per calculation
+- Asynchronous POST Requests with timeout to prevent bottlenecks
+- Lowered default color change threshold since it is now capable of handling color changes more often
+
 **Required Prerequisites:**
 [JDK](https://docs.oracle.com/en/java/javase/17/install/overview-jdk-installation.html), [Apache Maven](https://maven.apache.org/download.cgi), and [your Govee API Key](https://developer.govee.com/reference/apply-you-govee-api-key)
 
@@ -16,7 +22,7 @@ No need to buy a DreamView device or camera to support light sync for Govee prod
 *For those who want to play around with the performance and color change threshold, look for the "MODIFIABLE" comments in `Main.java`*
 
 ***Planned Future Updates:***
+- Reduced latency delay ✅
 - More user-friendly support ⭐
-- Reduced latency delay ⭐
 - Ability to use screen edges for color sync ⭐
 - User Suggestions: https://forms.gle/NK6y5NysLNNfNUKC7

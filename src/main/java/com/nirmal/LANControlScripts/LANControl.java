@@ -12,6 +12,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public class LANControl {
+    private static final String DEVICE_IP = "{YOUR_DEVICE_IP}";
     private static final int THRESHOLD = 25; // MODIFIABLE: THRESHOLD SET TO 25 BY DEFAULT!
 
     private static volatile int[] prevColor = {0, 0, 0};
@@ -79,7 +80,7 @@ public class LANControl {
 
     public static void main(String[] args) throws Exception {
 
-        LANControl controller = new LANControl("10.201.168.134", 4003);
+        LANControl controller = new LANControl(DEVICE_IP, 4003);
 
         // Thread 1: Color calculation, running every 50ms by default
         scheduler.scheduleAtFixedRate(() -> {

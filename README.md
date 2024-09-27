@@ -5,6 +5,7 @@ No need to buy a DreamView device or camera to support light sync for Govee prod
 [JDK](https://docs.oracle.com/en/java/javase/17/install/overview-jdk-installation.html), [Apache Maven](https://maven.apache.org/download.cgi), and [your Govee API Key](https://developer.govee.com/reference/apply-you-govee-api-key) (if using API instead of LAN control)
 
 **Steps to Sync Lights:**
+
 *Option 1: LAN Control (fast, but not available on all devices and sometimes unavailable on the Govee app)*
  - Turn on your Govee Lights
  - After cloning repo, run `mvn install` in your terminal and you should see "BUILD SUCCESS"

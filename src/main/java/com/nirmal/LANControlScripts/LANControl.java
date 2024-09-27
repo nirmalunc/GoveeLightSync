@@ -12,7 +12,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public class LANControl {
-    private static final String DEVICE_IP = "{YOUR_DEVICE_IP}";
+    private static final String DEVICE_IP = "{YOUR_DEVICE_IP}"; // REQUIRED: REPLACE WITH YOUR DEVICE IP (Run "GetLANControlDetails.java" first!)
     private static final int THRESHOLD = 25; // MODIFIABLE: THRESHOLD SET TO 25 BY DEFAULT!
 
     private static volatile int[] prevColor = {0, 0, 0};

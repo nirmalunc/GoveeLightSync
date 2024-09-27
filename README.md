@@ -9,6 +9,7 @@ No need to buy a DreamView device or camera to support light sync for Govee prod
 
 *Option 1: LAN Control (fast, but not available on all devices and sometimes unavailable on the Govee app)*
  - Turn on your Govee Lights
+ - Open the Govee App and turn on "LAN Control" under device settings
  - After cloning repo, run `mvn install` in your terminal and you should see "BUILD SUCCESS"
  - Navigate to `\src\main\java\com\nirmal\LANControlScripts\GetLANControlDetails.java`
  - Run `GetLANControlDetails.java` and copy the device IP from the output

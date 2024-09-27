@@ -5,20 +5,16 @@ import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.time.Duration;
 import java.util.UUID;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
-
 import org.json.JSONObject;
 
 import io.github.cdimascio.dotenv.Dotenv;
@@ -26,7 +22,6 @@ import io.github.cdimascio.dotenv.Dotenv;
 public class Main {
 
     private static final int THRESHOLD = 15; // MODIFIABLE: THRESHOLD SET TO 15 BY DEFAULT!
-
     private static final Dotenv dotenv = Dotenv.load();
     
     // Define Govee API endpoint and headers
@@ -93,7 +88,7 @@ public class Main {
     }
 
     // Capture entire screen and calculate the average color
-    public static int[] averageColor() throws AWTException {
+    private static int[] averageColor() throws AWTException {
         Robot robot = new Robot();
         Rectangle screenRect = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
         BufferedImage screenShot = robot.createScreenCapture(screenRect);
@@ -124,7 +119,7 @@ public class Main {
     }
 
     // Updates color parameter and calls POST request function
-    public static void setColor(int rgbNumber) throws IOException {
+    private static void setColor(int rgbNumber) throws IOException {
         capability.put("value", rgbNumber);
 
         // Send the updated JSON object
@@ -143,10 +138,13 @@ public class Main {
                             .header("Govee-API-Key", API_KEY)
                             .POST(HttpRequest.BodyPublishers.ofString(jsonData, StandardCharsets.UTF_8))
                             .build();
+
+                JSONObject jsonObject = new JSONObject(jsonData);
+                System.out.println("Sending JSON request: \n" + jsonObject.toString(4)); // Indentation level of 4
     
                 // Send the request asynchronously
                 client.sendAsync(request, HttpResponse.BodyHandlers.discarding())
-                .orTimeout(250, TimeUnit.MILLISECONDS) // Timeout if the request takes too long
+                // .orTimeout(250, TimeUnit.MILLISECONDS) // Timeout if the request takes too long
                 // .thenAccept(response -> {
                 //     long endTime = System.nanoTime();
                 //     System.out.println("Program took " + (endTime - startTime) / 1000000 + " milliseconds");

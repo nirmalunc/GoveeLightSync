@@ -50,7 +50,7 @@ public class LANControl {
         long sumRed = 0, sumGreen = 0, sumBlue = 0;
         int width = screenShot.getWidth();
         int height = screenShot.getHeight();
-        int numPixels = (width * height)/4;
+        double totalWeight = 0;
 
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x+=4) {
@@ -59,15 +59,20 @@ public class LANControl {
                 int green = (rgb >> 8) & 0xFF;
                 int blue = rgb & 0xFF;
 
-                sumRed += red;
-                sumGreen += green;
-                sumBlue += blue;
+                // Brightness formula to weigh brighter colors heavier than dark colors
+                double brightness = 0.2126 * red + 0.7152 * green + 0.0722 * blue;
+                double weight = Math.max(brightness / 255.0, 0.1);
+
+                sumRed += red * weight;
+                sumGreen += green * weight;
+                sumBlue += blue * weight;
+                totalWeight += weight;
             }
         }
 
-        int avgRed = (int) (sumRed / numPixels);
-        int avgGreen = (int) (sumGreen / numPixels);
-        int avgBlue = (int) (sumBlue / numPixels);
+        int avgRed = (int) (sumRed / totalWeight);
+        int avgGreen = (int) (sumGreen / totalWeight);
+        int avgBlue = (int) (sumBlue / totalWeight);
 
         return new int[]{avgRed, avgGreen, avgBlue};
     }
@@ -87,11 +92,11 @@ public class LANControl {
             try {
                 int[] calculatedColor = averageColor();  // Compute the new color
 
-                // Update shared newColor array
+                // Update shared newColor array and smooth color transition
                 synchronized (newColor) {
-                    newColor[0] = (int) ((1 - 0.1) * calculatedColor[0] + 0.1 * prevColor[0]);
-                    newColor[1] = (int) ((1 - 0.1) * calculatedColor[1] + 0.1 * prevColor[1]);
-                    newColor[2] = (int) ((1 - 0.1) * calculatedColor[2] + 0.1 * prevColor[2]);
+                    newColor[0] = (int) ((1 - 0.05) * calculatedColor[0] + 0.05 * prevColor[0]);
+                    newColor[1] = (int) ((1 - 0.05) * calculatedColor[1] + 0.05 * prevColor[1]);
+                    newColor[2] = (int) ((1 - 0.05) * calculatedColor[2] + 0.05 * prevColor[2]);
                     colorChanged = true;  // Indicate that the color has been updated
                 }
 

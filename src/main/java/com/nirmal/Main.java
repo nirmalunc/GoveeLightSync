@@ -96,7 +96,7 @@ public class Main {
         long sumRed = 0, sumGreen = 0, sumBlue = 0;
         int width = screenShot.getWidth();
         int height = screenShot.getHeight();
-        int numPixels = (width * height)/4;
+        double totalWeight = 0;
 
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x+=4) {
@@ -105,21 +105,27 @@ public class Main {
                 int green = (rgb >> 8) & 0xFF;
                 int blue = rgb & 0xFF;
 
-                sumRed += red;
-                sumGreen += green;
-                sumBlue += blue;
+                // Brightness formula to weigh brighter colors heavier than dark colors
+                double brightness = 0.2126 * red + 0.7152 * green + 0.0722 * blue;
+                double weight = Math.max(brightness / 255.0, 0.1);
+
+                sumRed += red * weight;
+                sumGreen += green * weight;
+                sumBlue += blue * weight;
+                totalWeight += weight;
             }
         }
 
-        int avgRed = (int) (sumRed / numPixels);
-        int avgGreen = (int) (sumGreen / numPixels);
-        int avgBlue = (int) (sumBlue / numPixels);
+        int avgRed = (int) (sumRed / totalWeight);
+        int avgGreen = (int) (sumGreen / totalWeight);
+        int avgBlue = (int) (sumBlue / totalWeight);
 
         return new int[]{avgRed, avgGreen, avgBlue};
     }
 
     // Updates color parameter and calls POST request function
-    private static void setColor(int rgbNumber) throws IOException {
+    private static void changeColor(int red, int green, int blue) throws IOException {
+        int rgbNumber = ((red & 0xFF) << 16) | ((green & 0xFF) << 8) | (blue & 0xFF);
         capability.put("value", rgbNumber);
 
         // Send the updated JSON object
@@ -184,9 +190,9 @@ public class Main {
 
                 // Update shared newColor array
                 synchronized (newColor) {
-                    newColor[0] = (int) ((1 - 0.1) * calculatedColor[0] + 0.1 * prevColor[0]);
-                    newColor[1] = (int) ((1 - 0.1) * calculatedColor[1] + 0.1 * prevColor[1]);
-                    newColor[2] = (int) ((1 - 0.1) * calculatedColor[2] + 0.1 * prevColor[2]);
+                    newColor[0] = (int) ((1 - 0.05) * calculatedColor[0] + 0.05 * prevColor[0]);
+                    newColor[1] = (int) ((1 - 0.05) * calculatedColor[1] + 0.05 * prevColor[1]);
+                    newColor[2] = (int) ((1 - 0.05) * calculatedColor[2] + 0.05 * prevColor[2]);
                     colorChanged = true;  // Indicate that the color has been updated
                 }
 
@@ -201,11 +207,10 @@ public class Main {
             synchronized (newColor) {
                 // Check if the threshold is surpassed and color changed
                 if (colorChanged && isThresholdSurpassed()) {
-                    int rgbNumber = ((newColor[0] & 0xFF) << 16) | ((newColor[1] & 0xFF) << 8) | (newColor[2] & 0xFF);
 
                     // Submit the task to update the color
                     try {
-                        setColor(rgbNumber);
+                        changeColor(newColor[0], newColor[1], newColor[2]);
                         // System.out.println("Color Changed to: " + rgbNumber); // Optional: Uncomment if you want to be notified each time the color changes
                     } catch (IOException e) {
                         e.printStackTrace();

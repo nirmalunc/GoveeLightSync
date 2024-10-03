@@ -1,6 +1,7 @@
 # GoveeLightSync
 No need to buy a DreamView device or camera to support light sync for Govee products! Now you can natively sync any Govee lights to your display.
 
+\
 **3 Different Options to Sync Lights:**
 
 **Option 1 (EASIEST and no coding required): LAN Control GUI**

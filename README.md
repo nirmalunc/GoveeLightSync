@@ -4,6 +4,7 @@ No need to buy a DreamView device or camera to support light sync for Govee prod
 **Steps to Sync Lights:**
 
 *Option 1 (EASIEST and no coding required): LAN Control GUI*
+
 **Required Prerequisites:**
 [JRE]([https://docs.oracle.com/en/java/javase/17/install/overview-jdk-installation.html](https://www.java.com/en/download/))
  - Turn on your Govee Lights
@@ -12,6 +13,7 @@ No need to buy a DreamView device or camera to support light sync for Govee prod
  - Run it! (You may need to install Java Runtime Environment if you do not already have it)
 
 *Option 2: LAN Control (fast, but not available on all devices and sometimes unavailable on the Govee app)*
+
 **Required Prerequisites:**
 [JDK](https://docs.oracle.com/en/java/javase/17/install/overview-jdk-installation.html), [Apache Maven](https://maven.apache.org/download.cgi)
  - Turn on your Govee Lights
@@ -23,6 +25,7 @@ No need to buy a DreamView device or camera to support light sync for Govee prod
  - Run the `LANControl.java` file and your lights should be synced to your display!
 
 *Option 3: Govee API (slower, but supported by more devices and always available)*
+
 **Required Prerequisites:**
 [JDK](https://docs.oracle.com/en/java/javase/17/install/overview-jdk-installation.html), [Apache Maven](https://maven.apache.org/download.cgi), and [your Govee API Key](https://developer.govee.com/reference/apply-you-govee-api-key)
  1. Turn on your Govee Lights

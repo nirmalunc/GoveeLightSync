@@ -26,6 +26,8 @@ No need to buy a DreamView device or camera to support light sync for Govee prod
 
 *For those who want to play around with the performance and color change threshold, look for the "MODIFIABLE" comments in `Main.java` and `LANControl.java`*
 
+***9/28 Patch Update - Better color perception for dark scenes!***
+- Changed color calculation algorithm to weigh colors based on luminance for better perceptual accuracy 
 
 ***9/27 Patch Update - EVEN MORE Reduced Latency using LAN Control!***
 - Everything needed to sync through LAN Control is inside `src\main\java\com\nirmal\LANControlScripts` directory

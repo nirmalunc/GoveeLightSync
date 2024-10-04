@@ -7,11 +7,12 @@ No need to buy a DreamView device or camera to support light sync for Govee prod
 **Option 1 (EASIEST and no coding required): LAN Control GUI**
 
 *Required Prerequisites:*
-[JRE](https://www.java.com/en/download/)
+[JDK 23](https://www.oracle.com/java/technologies/downloads/#jdk23)
  1. Turn on your Govee Lights
- 2. Open the Govee App and turn on "LAN Control" under device settings
+ 2. Open the Govee App and turn on "LAN Control" under device settings (the app can be buggy, this [thread](https://www.reddit.com/r/Govee/comments/wsupdh/lan_control_option_doesnt_appear_in_the_app/) has common solutions)
  3. Install 'SyncApp.exe' from the repository (Look above ^)
  4. Run it!
+ 5. If you get a Java error, you likely need to save JAVA_HOME in your system variables: [Instructions](https://confluence.atlassian.com/doc/setting-the-java_home-variable-in-windows-8895.html)
 
 \
 **Option 2: LAN Control (fast, but not available on all devices and sometimes unavailable on the Govee app)**

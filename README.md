@@ -20,7 +20,7 @@ Demo Video: https://tinyurl.com/LightSync
 **Option 2: LAN Control (fast, but not available on all devices and sometimes unavailable on the Govee app)**
 
 *Required Prerequisites:*
-[JDK](https://docs.oracle.com/en/java/javase/17/install/overview-jdk-installation.html), [Apache Maven](https://maven.apache.org/download.cgi)
+[JDK 23](https://www.oracle.com/java/technologies/downloads/#jdk23), [Apache Maven](https://maven.apache.org/download.cgi)
  1. Turn on your Govee Lights
  2. Open the Govee App and turn on "LAN Control" under device settings
  3. After cloning repo, run `mvn install` in your terminal and you should see "BUILD SUCCESS"

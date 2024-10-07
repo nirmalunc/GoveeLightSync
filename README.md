@@ -66,4 +66,5 @@ Demo Video: https://tinyurl.com/LightSync
 - Reduced latency delay ✅
 - More user-friendly support ✅
 - Ability to use screen edges for color sync ⭐
+- More gradual color syncing for drastic scene changes ⭐
 - User Suggestions: https://forms.gle/NK6y5NysLNNfNUKC7
